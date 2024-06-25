@@ -78,7 +78,7 @@ include "header.php";
                             <p>Center's Count</p>
                         </div>
                         <div class="icon"><i class="fa fa-building"></i></div>
-                        <a href="admission.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="center.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>
