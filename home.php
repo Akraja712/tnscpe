@@ -46,7 +46,43 @@ include "header.php";
                 </li>
             </ol>
         </section>
-       
+        <section class="content">
+            <div class="row">
+                <div class="col-lg-4 col-xs-6">
+                    <div class="small-box bg-aqua">
+                        <div class="inner">
+                            <h3><?php
+                            $sql = "SELECT id FROM admission ";
+                            $db->sql($sql);
+                            $res = $db->getResult();
+                            $num = $db->numRows($res);
+                            echo $num;
+                             ?></h3>
+                            <p>Admission Count</p>
+                        </div>
+                        <div class="icon"><i class="fa fa-users"></i></div>
+                        <a href="admission.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <div class="row">
+                <div class="col-lg-4 col-xs-6">
+                    <div class="small-box bg-green">
+                        <div class="inner">
+                            <h3><?php
+                            $sql = "SELECT id FROM center";
+                            $db->sql($sql);
+                            $res = $db->getResult();
+                            $num = $db->numRows($res);
+                            echo $num;
+                             ?></h3>
+                            <p>Center's Count</p>
+                        </div>
+                        <div class="icon"><i class="fa fa-building"></i></div>
+                        <a href="admission.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
     <?php include "footer.php"; ?>
 </body>
