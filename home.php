@@ -64,7 +64,6 @@ include "header.php";
                         <a href="admission.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
-                <div class="row">
                 <div class="col-lg-4 col-xs-6">
                     <div class="small-box bg-green">
                         <div class="inner">
@@ -79,6 +78,22 @@ include "header.php";
                         </div>
                         <div class="icon"><i class="fa fa-building"></i></div>
                         <a href="center.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-xs-6">
+                    <div class="small-box bg-purple">
+                        <div class="inner">
+                            <h3><?php
+                            $sql = "SELECT id FROM student";
+                            $db->sql($sql);
+                            $res = $db->getResult();
+                            $num = $db->numRows($res);
+                            echo $num;
+                             ?></h3>
+                            <p>Student Count</p>
+                        </div>
+                        <div class="icon"><i class="fa fa-user"></i></div>
+                        <a href="student.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>

@@ -736,6 +736,74 @@ if (isset($_GET['table']) && $_GET['table'] == 'center') {
     $bulkData['rows'] = $rows;
     print_r(json_encode($bulkData));
 }
+
+// student
+if (isset($_GET['table']) && $_GET['table'] == 'student') {
+
+    $offset = 0;
+    $limit = 10;
+    $where = '';
+    $sort = 'id';
+    $order = 'DESC';
+    if (isset($_GET['offset']))
+        $offset = $db->escapeString($_GET['offset']);
+    if (isset($_GET['limit']))
+        $limit = $db->escapeString($_GET['limit']);
+    if (isset($_GET['sort']))
+        $sort = $db->escapeString($_GET['sort']);
+    if (isset($_GET['order']))
+        $order = $db->escapeString($_GET['order']);
+
+    if (isset($_GET['search']) && !empty($_GET['search'])) {
+        $search = $db->escapeString($_GET['search']);
+        $where .= "WHERE s.id LIKE '%" . $search . "%' OR s.name LIKE '%" . $search . "%'";
+    }
+    
+    $sql = "SELECT COUNT(s.id) as total FROM `student` s LEFT JOIN `category` c ON s.category_id = c.id ". $where;
+    $db->sql($sql);
+    $res = $db->getResult();
+    foreach ($res as $row)
+        $total = $row['total'];
+   
+    $sql = "SELECT s.*, c.name as category_name FROM student s LEFT JOIN category c ON s.category_id = c.id ". $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
+    $db->sql($sql);
+    $res = $db->getResult();
+
+    $bulkData = array();
+    $bulkData['total'] = $total;
+    
+    $rows = array();
+    $tempRow = array();
+
+    foreach ($res as $row) {
+        $operate = ' <a href="edit-student.php?id=' . $row['id'] . '"><i class="fa fa-edit"></i>Edit</a>';
+        $operate .= ' <a class="text text-danger" href="delete-student.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
+        $tempRow['id'] = $row['id'];
+        $tempRow['form_no'] = $row['form_no'];
+        $tempRow['fathers_name'] = $row['fathers_name'];
+        $tempRow['registration_no'] = $row['registration_no'];
+        $tempRow['dob'] = $row['dob'];
+        $tempRow['gender'] = $row['gender'];
+        if (!empty($row['image'])) {
+            $tempRow['image'] = "<a data-lightbox='category' href='" . $row['image'] . "' data-caption='" . $row['image'] . "'><img src='" . $row['image'] . "' title='" . $row['image'] . "' height='50' /></a>";
+        } else {
+            $tempRow['image'] = 'No Image';
+        }
+        $tempRow['category_name'] = $row['category_name'];
+        $tempRow['admission_year'] = $row['admission_year'];
+        $tempRow['name'] = $row['name'];
+        $tempRow['course_type'] = $row['course_type'];
+        $tempRow['faculty'] = $row['faculty'];
+        $tempRow['course_name'] = $row['course_name'];
+        $tempRow['nationality'] = $row['nationality'];
+        $tempRow['operate'] = $operate;
+        $rows[] = $tempRow;
+    }
+    $bulkData['rows'] = $rows;
+    print_r(json_encode($bulkData));
+}
+
+
 //explore
 if (isset($_GET['table']) && $_GET['table'] == 'explore') {
 
