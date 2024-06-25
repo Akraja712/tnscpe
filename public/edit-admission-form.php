@@ -150,21 +150,21 @@ if (!isset($res[0])) {
                                        $result = $db->getResult();
                                       foreach ($result as $value) {
                                           ?>
-                                     <option value='<?= $value['id'] ?>' <?= ($res[0]['category_id'] == $value['id']) ? 'selected' : ''; ?>><?= $value['name'] ?></option>
+                                     <option value='<?php echo $value['id'] ?>' <?php echo ($res[0]['category_id'] == $value['id']) ? 'selected' : ''; ?>><?php echo $value['name'] ?></option>
                                     <?php } ?>
                                </select>
                             </div>
                             <div class='col-md-4'>
-                               <label for="id_proof_type">Id Proof Type</label> <i class="text-danger asterik">*</i>
-                               <select id='id_proof_type' name="id_proof_type" class='form-control' required>
-                                  <option value=''>Select Id Type</option>
-                                  <option value='aadhaarcard' <?= ($res[0]['id_proof_type'] == 'aadhaarcard') ? 'selected' : ''; ?>>Aadhaar Card</option>
-                                  <option value='hsc' <?= ($res[0]['id_proof_type'] == 'hsc') ? 'selected' : ''; ?>>HSC</option>
-                                  <option value='sslc' <?= ($res[0]['id_proof_type'] == 'sslc') ? 'selected' : ''; ?>>SSLC</option>
+                               <label for="id_proof_type">ID Proof Type</label> <i class="text-danger asterik">*</i>
+                               <select id='id_proof_type' name="id_proof_type" class='form-control' required onchange="updateIdProofNumberLength();">
+                                  <option value=''>Select ID Type</option>
+                                  <option value='aadhaarcard' <?php echo ($res[0]['id_proof_type'] == 'aadhaarcard') ? 'selected' : ''; ?>>Aadhaar Card</option>
+                                  <option value='hsc' <?php echo ($res[0]['id_proof_type'] == 'hsc') ? 'selected' : ''; ?>>HSC</option>
+                                  <option value='sslc' <?php echo ($res[0]['id_proof_type'] == 'sslc') ? 'selected' : ''; ?>>SSLC</option>
                                </select>
                             </div>
                             <div class='col-md-4'>
-                                <label for="id_proof_no">Id Proof No</label> <i class="text-danger asterik">*</i><?php echo isset($error['id_proof_no']) ? $error['id_proof_no'] : ''; ?>
+                                <label for="id_proof_no">ID Proof No</label> <i class="text-danger asterik">*</i><?php echo isset($error['id_proof_no']) ? $error['id_proof_no'] : ''; ?>
                                 <input type="text" class="form-control" name="id_proof_no" id="id_proof_no" value="<?php echo $res[0]['id_proof_no']; ?>" required>
                             </div>
                         </div>
@@ -182,15 +182,15 @@ if (!isset($res[0])) {
                                        $result = $db->getResult();
                                       foreach ($result as $value) {
                                           ?>
-                                     <option value='<?= $value['id'] ?>' <?= ($res[0]['center_id'] == $value['id']) ? 'selected' : ''; ?>><?= $value['name'] ?></option>
+                                     <option value='<?php echo $value['id'] ?>' <?php echo ($res[0]['center_id'] == $value['id']) ? 'selected' : ''; ?>><?php echo $value['name'] ?></option>
                                     <?php } ?>
                                </select>
                             </div>
                             <div class='col-md-4'>
-                               <label for="employeed">Are You Employeed</label> <i class="text-danger asterik">*</i>
+                               <label for="employeed">Are You Employed</label> <i class="text-danger asterik">*</i>
                                <select id='employeed' name="employeed" class='form-control' required>
-                                  <option value='1' <?= ($res[0]['employeed'] == '1') ? 'selected' : ''; ?>>Yes</option>
-                                  <option value='0' <?= ($res[0]['employeed'] == '0') ? 'selected' : ''; ?>>No</option>
+                                  <option value='1' <?php echo ($res[0]['employeed'] == '1') ? 'selected' : ''; ?>>Yes</option>
+                                  <option value='0' <?php echo ($res[0]['employeed'] == '0') ? 'selected' : ''; ?>>No</option>
                                </select>
                             </div>
                         </div>
@@ -232,4 +232,47 @@ if (!isset($res[0])) {
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+    function updateIdProofNumberLength() {
+        var idProofType = document.getElementById('id_proof_type').value;
+        var idProofNo = document.getElementById('id_proof_no');
+
+        if (idProofType == 'aadhaarcard') {
+            idProofNo.setAttribute('maxlength', '12');
+            idProofNo.setAttribute('minlength', '12');
+        } else if (idProofType == 'hsc') {
+            idProofNo.setAttribute('maxlength', '6');
+            idProofNo.setAttribute('minlength', '6');
+        } else if (idProofType == 'sslc') {
+            idProofNo.setAttribute('maxlength', '7');
+            idProofNo.setAttribute('minlength', '7');
+        } else {
+            idProofNo.removeAttribute('maxlength');
+            idProofNo.removeAttribute('minlength');
+        }
+    }
+
+    function validateIdProofNumber() {
+        var idProofType = document.getElementById('id_proof_type').value;
+        var idProofNo = document.getElementById('id_proof_no').value;
+
+        if (idProofType == 'aadhaarcard' && idProofNo.length != 12) {
+            alert('Aadhaar card number must be 12 digits long.');
+            return false;
+        } else if ((idProofType == 'hsc' || idProofType == 'sslc') && idProofNo.length != 10) {
+            alert('HSC/SSLC number must be 10 digits long.');
+            return false;
+        } else if (idProofType == 'hsc' && idProofNo.length != 6) {
+            alert('HSC number must be 6 digits long.');
+            return false;
+        } else if (idProofType == 'sslc' && idProofNo.length != 7) {
+            alert('SSLC number must be 7 digits long.');
+            return false;
+        }
+
+        return true;
+    }
+
+    // Initialize the length attributes based on the current value
+    updateIdProofNumberLength();
 </script>

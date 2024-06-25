@@ -22,12 +22,12 @@
 <?php include "header.php";?>
 <html>
 <head>
-<title>Edit Market | - Dashboard</title>
+<title>Edit Centers | - Dashboard</title>
 </head>
 </body>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
-        <?php include('public/edit-market-form.php'); ?>
+        <?php include('public/edit-center-form.php'); ?>
       </div><!-- /.content-wrapper -->
   </body>
 </html>

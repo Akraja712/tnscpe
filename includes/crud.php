@@ -19,14 +19,14 @@ class Database
 
      //live
     private $db_host = "localhost";  // Change as required
-    private $db_user = "root";  // Change as required
-    private $db_pass = "";  // Change as required
-    private $db_name = "tnscpe"; 
+    private $db_user = "u743445510_tnscpe";  // Change as required
+    private $db_pass = "Tnscpe@2024";  // Change as required
+    private $db_name = "u743445510_tnscpe"; 
 
     //private $db_host = "localhost";  // Change as required
     // private $db_user = "root";  // Change as required
     // private $db_pass = "";  // Change as required
-    //private $db_name = "pocket_farm";    // Change as required
+    //private $db_name = "tnscpe";    // Change as required
 
     private $con = false; // Check to see if the connection is active
     private $myconn = ""; // This will be our mysqli object

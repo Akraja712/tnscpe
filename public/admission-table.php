@@ -21,8 +21,9 @@
                         }'>
                             <thead>
                                 <tr>
-                                    
+                                <th  data-field="operate" data-events="actionEvents">Action</th>
                                     <th  data-field="id" data-sortable="true">ID</th>
+                                    <th data-field="image">Photo</th>
                                     <th data-field="candidate_name" data-sortable="true">Candidate Name</th>
                                     <th data-field="fathers_name" data-sortable="true">Father's Name</th>
                                     <th data-field="mothers_name" data-sortable="true">Mother's Name</th>
@@ -31,10 +32,8 @@
                                     <th data-field="category_name" data-sortable="true">Category Name</th>
                                     <th data-field="id_proof_type" data-sortable="true">Id Proof Type</th>
                                     <th data-field="id_proof_no" data-sortable="true">Id Proof No</th>
-                                    <th data-field="image">Photo</th>
                                     <th data-field="center_name" data-sortable="true">Center Name</th>
                                     <th data-field="employeed" data-sortable="true">Employeed</th>
-                                    <th  data-field="operate" data-events="actionEvents">Action</th>
                                 </tr>
                             </thead>
                         </table>

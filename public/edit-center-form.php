@@ -16,11 +16,10 @@ if (isset($_GET['id'])) {
 if (isset($_POST['btnEdit'])) {
 
 	$name = $db->escapeString($_POST['name']);
-    $chilli_price = $db->escapeString($_POST['chilli_price']);
 	$error = array();
 
 	if (!empty($name)) {
-		$sql_query = "UPDATE market SET name='$name',chilli_price='$chilli_price' WHERE id =  $ID";
+		$sql_query = "UPDATE center SET name='$name' WHERE id =  $ID";
 		$db->sql($sql_query);
 		$update_result = $db->getResult();
 		if (!empty($update_result)) {
@@ -31,7 +30,7 @@ if (isset($_POST['btnEdit'])) {
 
 		// check update result
 		if ($update_result == 1) {
-			$error['update_languages'] = " <section class='content-header'><span class='label label-success'>Market updated Successfully</span></section>";
+			$error['update_languages'] = " <section class='content-header'><span class='label label-success'>Center updated Successfully</span></section>";
 		} else {
 			$error['update_languages'] = " <span class='label label-danger'>Failed to Update</span>";
 		}
@@ -42,18 +41,18 @@ if (isset($_POST['btnEdit'])) {
 // create array variable to store previous data
 $data = array();
 
-$sql_query = "SELECT * FROM market WHERE id =" . $ID;
+$sql_query = "SELECT * FROM center WHERE id =" . $ID;
 $db->sql($sql_query);
 $res = $db->getResult();
 
 if (isset($_POST['btnCancel'])) { ?>
 	<script>
-		window.location.href = "market.php";
+		window.location.href = "center.php";
 	</script>
 <?php } ?>
 <section class="content-header">
 	<h1>
-		Edit Market<small><a href='market.php'><i class='fa fa-angle-double-left'></i>&nbsp;&nbsp;&nbsp;Back to Market</a></small></h1>
+		Edit Centers<small><a href='center.php'><i class='fa fa-angle-double-left'></i>&nbsp;&nbsp;&nbsp;Back to Centers</a></small></h1>
 	<small><?php echo isset($error['update_languages']) ? $error['update_languages'] : ''; ?></small>
 	<ol class="breadcrumb">
 		<li><a href="home.php"><i class="fa fa-home"></i> Home</a></li>
@@ -77,10 +76,6 @@ if (isset($_POST['btnCancel'])) { ?>
                                 <div class="col-md-6">
 									<label for="exampleInputEmail1">Name</label><i class="text-danger asterik">*</i>
 									<input type="text" class="form-control" name="name" value="<?php echo $res[0]['name']; ?>">
-								</div>
-                                <div class="col-md-6">
-									<label for="exampleInputEmail1">Chilli Price</label><i class="text-danger asterik">*</i>
-									<input type="number" class="form-control" name="chilli_price" value="<?php echo $res[0]['chilli_price']; ?>">
 								</div>
                                 </div>
                              </div>

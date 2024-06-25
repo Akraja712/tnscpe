@@ -25,13 +25,13 @@
 <?php include "header.php";?>
 <html>
 <head>
-<title>Add Market | Update Data</title>
+<title>Add Centers | Update Data</title>
 </head>
 </body>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
 		<?php
-			include('public/add-market-form.php'); 
+			include('public/add-center-form.php'); 
 		?>
       </div><!-- /.content-wrapper -->
   </body>

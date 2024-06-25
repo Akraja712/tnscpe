@@ -183,7 +183,7 @@ $fn = new custom_functions;
                     </a>
                 </li>
                 <li class="treeview">
-                    <a href="#">
+                    <a href="center.php">
                     <i class="fa fa-building"></i>
                         <span>Centers</span>
                     </a>

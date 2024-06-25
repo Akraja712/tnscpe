@@ -41,17 +41,17 @@ if (isset($_POST['btnDelete'])) {
 	}
 
 	// delete data from menu table
-	$sql_query = "DELETE FROM home_slides WHERE id =" . $ID;
+	$sql_query = "DELETE FROM admission WHERE id =" . $ID;
 	$db->sql($sql_query);
 	$delete_result = $db->getResult();
-	header("location: home_slides.php");
+	header("location: admission.php");
 }
 
 if (isset($_POST['btnNo'])) {
-header("location: home_slides.php");
+header("location: admission.php");
 }
 if (isset($_POST['btncancel'])) {
-header("location: home_slides.php");
+header("location: admission.php");
 }
 ?>
 
@@ -59,7 +59,7 @@ header("location: home_slides.php");
 <html>
 
 <head>
-    <title>Delete Home Slide | - Dashboard</title>
+    <title>Delete Admission | - Dashboard</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 
@@ -70,7 +70,7 @@ header("location: home_slides.php");
 	    <h1>Confirm Action</h1>
 		<hr />
 		<form method="post">
-			<p>Are you sure want to delete this Home Slide?</p>
+			<p>Are you sure want to delete this Admission?</p>
 			<input type="submit" class="btn btn-primary" value="Delete" name="btnDelete" />
 			<input type="submit" class="btn btn-danger" value="Cancel" name="btnNo" />
 			<input type="submit" class="btn btn-warning" value="Back" name="btncancel" />

@@ -8,22 +8,17 @@ $fn = new custom_functions;
 if (isset($_POST['btnAdd'])) {
 
         $name = $db->escapeString(($_POST['name']));
-        $chilli_price = $db->escapeString(($_POST['chilli_price']));
         $error = array();
        
         if (empty($name)) {
             $error['name'] = " <span class='label label-danger'>Required!</span>";
         }
-
-        if (empty($chilli_price)) {
-            $error['chilli_price'] = " <span class='label label-danger'>Required!</span>";
-        }
        
        
-       if (!empty($name) && !empty($chilli_price)) 
+       if (!empty($name)) 
        {
            
-            $sql_query = "INSERT INTO market (name,chilli_price)VALUES('$name','$chilli_price')";
+            $sql_query = "INSERT INTO center (name)VALUES('$name')";
             $db->sql($sql_query);
             $result = $db->getResult();
             if (!empty($result)) {
@@ -35,7 +30,7 @@ if (isset($_POST['btnAdd'])) {
             if ($result == 1) {
                 
                 $error['add_languages'] = "<section class='content-header'>
-                                                <span class='label label-success'>Market Added Successfully</span> </section>";
+                                                <span class='label label-success'>Center Added Successfully</span> </section>";
             } else {
                 $error['add_languages'] = " <span class='label label-danger'>Failed</span>";
             }
@@ -43,7 +38,7 @@ if (isset($_POST['btnAdd'])) {
         }
 ?>
 <section class="content-header">
-    <h1>Add New Market <small><a href='market.php'> <i class='fa fa-angle-double-left'></i>&nbsp;&nbsp;&nbsp;Back to Market</a></small></h1>
+    <h1>Add New Centers <small><a href='center.php'> <i class='fa fa-angle-double-left'></i>&nbsp;&nbsp;&nbsp;Back to Centers</a></small></h1>
 
     <?php echo isset($error['add_languages']) ? $error['add_languages'] : ''; ?>
     <ol class="breadcrumb">
@@ -69,10 +64,6 @@ if (isset($_POST['btnAdd'])) {
                                 <div class='col-md-6'>
                                     <label for="exampleInputtitle">Name</label> <i class="text-danger asterik">*</i>
                                     <input type="name" class="form-control" name="name" required>
-                                </div>
-                                <div class='col-md-6'>
-                                    <label for="exampleInputtitle">Chilli Price</label> <i class="text-danger asterik">*</i>
-                                    <input type="number" class="form-control" name="chilli_price" required>
                                 </div>
                             </div>
                         </div>
