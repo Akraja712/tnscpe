@@ -809,9 +809,16 @@ if (isset($_GET['table']) && $_GET['table'] == 'result') {
 
     $offset = 0;
     $limit = 10;
-    $where = '';
+    $where = 'WHERE 1'; // Ensure there is always a WHERE clause
     $sort = 'id';
     $order = 'DESC';
+
+    if (isset($_GET['status']) && $_GET['status'] != '') {
+        $status = $db->escapeString($fn->xss_clean($_GET['status']));
+        $where .= " AND status = '$status'";
+    }
+
+
     if (isset($_GET['offset']))
         $offset = $db->escapeString($_GET['offset']);
     if (isset($_GET['limit']))
