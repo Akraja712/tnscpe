@@ -10,6 +10,7 @@ if (isset($_POST['btnAdd'])) {
     $total_marks = $db->escapeString($_POST['total_marks']);
     $obtained_marks = $db->escapeString($_POST['obtained_marks']);
     $sgpa = $db->escapeString($_POST['sgpa']);
+    $registration_no_id = $db->escapeString($_POST['registration_no_id']);
     $status = isset($_POST['status']) ? $db->escapeString($_POST['status']) : '';
 
     $error = array();
@@ -29,12 +30,15 @@ if (isset($_POST['btnAdd'])) {
     if (empty($sgpa)) {
         $error['sgpa'] = " <span class='label label-danger'>Required!</span>";
     }
+    if (empty($registration_no_id)) {
+        $error['registration_no_id'] = " <span class='label label-danger'>Required!</span>";
+    }
     if ($status === '') {
         $error['status'] = " <span class='label label-danger'>Required!</span>";
     }
 
-    if (!empty($year_semester) && !empty($exam_month_year) && !empty($total_marks) && !empty($obtained_marks) && !empty($sgpa) && $status !== '') {
-        $sql_query = "INSERT INTO result (year_semester, exam_month_year, total_marks, obtained_marks, sgpa, status) VALUES ('$year_semester', '$exam_month_year', '$total_marks', '$obtained_marks', '$sgpa', '$status')";
+    if (!empty($year_semester) && !empty($exam_month_year) && !empty($total_marks) && !empty($obtained_marks) && !empty($sgpa) && !empty($registration_no_id) && $status !== '') {
+        $sql_query = "INSERT INTO result (year_semester, exam_month_year, total_marks, obtained_marks, sgpa, status,registration_no_id) VALUES ('$year_semester', '$exam_month_year', '$total_marks', '$obtained_marks', '$sgpa', '$status','$registration_no_id')";
         $db->sql($sql_query);
         $result = $db->getResult();
         if (!empty($result)) {
@@ -70,6 +74,20 @@ if (isset($_POST['btnAdd'])) {
                     <div class="box-body">
                         <div class="row">
                             <div class="form-group">
+                            <div class='col-md-4'>
+                                       <label for="registration_no_id">Registration No</label> <i class="text-danger asterik">*</i>
+                                       <select id='registration_no_id' name="registration_no_id" class='form-control' required>
+                                             <option value="">--Select--</option>
+                                             <?php
+                                              $sql = "SELECT id, registration_no FROM `student`";
+                                              $db->sql($sql);
+                                               $result = $db->getResult();
+                                              foreach ($result as $value) {
+                                                  ?>
+                                             <option value='<?= $value['id'] ?>'><?= $value['registration_no'] ?></option>
+                                            <?php } ?>
+                                       </select>
+                                </div>
                                 <div class='col-md-4'>
                                     <label for="year_semester">Year/Semester</label> <i class="text-danger asterik">*</i>
                                     <input type="text" class="form-control" name="year_semester" required>
@@ -80,16 +98,15 @@ if (isset($_POST['btnAdd'])) {
                                     <input type="text" class="form-control" name="exam_month_year" required>
                                      
                                 </div>
-                                <div class='col-md-4'>
-                                    <label for="total_marks">Total Marks</label> <i class="text-danger asterik">*</i>
-                                    <input type="text" class="form-control" name="total_marks" required>
-                                  
-                                </div>
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="form-group">
+                            <div class='col-md-4'>
+                                    <label for="total_marks">Total Marks</label> <i class="text-danger asterik">*</i>
+                                    <input type="text" class="form-control" name="total_marks" required>
+                                </div>
                                 <div class='col-md-4'>
                                     <label for="obtained_marks">Obtained Marks</label> <i class="text-danger asterik">*</i>
                                     <input type="text" class="form-control" name="obtained_marks" required>
@@ -100,6 +117,11 @@ if (isset($_POST['btnAdd'])) {
                                     <input type="text" class="form-control" name="sgpa" required>
                                     
                                 </div>
+                            </div>
+                        </div>
+                        <br>
+                           <div class="row">
+                                <div class="form-group">
                                 <div class='col-md-4'>
                                     <label for="status">Status</label> <i class="text-danger asterik">*</i><br>
                                     <div class="btn-group">
@@ -112,9 +134,9 @@ if (isset($_POST['btnAdd'])) {
                                     </div>
                                     <?php echo isset($error['status']) ? $error['status'] : ''; ?>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
+                                </div>
+                            </div> 
+                      </div>
                     <br>
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary" name="btnAdd">Submit</button>

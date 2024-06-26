@@ -20,10 +20,11 @@ if (isset($_POST['btnEdit'])) {
     $total_marks = $db->escapeString(($_POST['total_marks']));
     $obtained_marks = $db->escapeString(($_POST['obtained_marks']));
     $sgpa = $db->escapeString(($_POST['sgpa']));
+	$registration_no_id = $db->escapeString($_POST['registration_no_id']);
     $status = $db->escapeString(($_POST['status']));
 	$error = array();
 
-		$sql_query = "UPDATE result SET year_semester='$year_semester',exam_month_year='$exam_month_year',total_marks='$total_marks',obtained_marks='$obtained_marks',sgpa='$sgpa',status='$status'  WHERE id =  $ID";
+		$sql_query = "UPDATE result SET year_semester='$year_semester',exam_month_year='$exam_month_year',total_marks='$total_marks',obtained_marks='$obtained_marks',sgpa='$sgpa',status='$status',registration_no_id='$registration_no_id'  WHERE id =  $ID";
 		$db->sql($sql_query);
 		$update_result = $db->getResult();
 		if (!empty($update_result)) {
@@ -72,6 +73,21 @@ if (isset($_POST['btnCancel'])) { ?>
                     <div class="box-body">
                         <div class="row">
                             <div class="form-group">
+							<div class='col-md-4'>
+                                   <label for="registration_no_id">Category</label> <i class="text-danger asterik">*</i>
+                                    <select id='registration_no_id' name="registration_no_id" class='form-control' required>
+                                      <option value="">--Select--</option>
+                                      <?php
+                                      $sql = "SELECT id, registration_no FROM `student`";
+                                      $db->sql($sql);
+                                       $result = $db->getResult();
+                                      foreach ($result as $value) {
+                                          ?>
+                                      <option value='<?php echo $value['id'] ?>' <?php echo ($res[0]['registration_no_id'] == $value['id']) ? 'selected' : ''; ?>><?php echo $value['registration_no'] ?></option>
+                                     <?php } ?>
+                                  </select>
+                                </div>
+
                                 <div class='col-md-4'>
                                     <label for="year_semester">Year/Semester</label> <i class="text-danger asterik">*</i>
                                     <input type="text" class="form-control" name="year_semester" value="<?php echo $res[0]['year_semester']; ?>" required>
@@ -80,15 +96,15 @@ if (isset($_POST['btnCancel'])) { ?>
                                     <label for="exam_month_year">Exam Month and Year</label> <i class="text-danger asterik">*</i>
                                     <input type="text" class="form-control" name="exam_month_year" value="<?php echo $res[0]['exam_month_year']; ?>" required>
                                 </div>
-                                <div class='col-md-4'>
-                                    <label for="total_marks">Total Marks</label> <i class="text-danger asterik">*</i>
-                                    <input type="number" class="form-control" name="total_marks" value="<?php echo $res[0]['total_marks']; ?>" required>
-                                </div>
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="form-group">
+							<div class='col-md-4'>
+                                    <label for="total_marks">Total Marks</label> <i class="text-danger asterik">*</i>
+                                    <input type="number" class="form-control" name="total_marks" value="<?php echo $res[0]['total_marks']; ?>" required>
+                                </div>
                                 <div class='col-md-4'>
                                     <label for="obtained_marks">Obtained Marks</label> <i class="text-danger asterik">*</i>
                                     <input type="number" class="form-control" name="obtained_marks" value="<?php echo $res[0]['obtained_marks']; ?>" required>
@@ -97,7 +113,12 @@ if (isset($_POST['btnCancel'])) { ?>
                                     <label for="sgpa">SGPA</label> <i class="text-danger asterik">*</i>
                                     <input type="number" class="form-control" name="sgpa" value="<?php echo $res[0]['sgpa']; ?>" required>
                                 </div>
-                                <div class='col-md-4'>
+                            </div>
+                        </div>
+						<br>
+						<div class="row">
+                             <div class="form-group">
+							 <div class='col-md-4'>
                                     <label for="status">Status</label> <i class="text-danger asterik">*</i><br>
 									<label class="btn btn-success" data-toggle-class="btn-default" data-toggle-passive-class="btn-default">
                                         <input type="radio" name="status" value="1" <?= ($res[0]['status'] == 1) ? 'checked' : ''; ?>> Pass 
@@ -106,8 +127,8 @@ if (isset($_POST['btnCancel'])) { ?>
                                         <input type="radio" name="status" value="0" <?= ($res[0]['status'] == 0) ? 'checked' : ''; ?>> Fail
                                     </label>
                                 </div>
-                            </div>
-                        </div>
+						     </div>
+					    </div>
                     </div>
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary" name="btnEdit">Update</button>

@@ -29,6 +29,7 @@
                                 <tr>
                                 <th  data-field="operate" data-events="actionEvents">Action</th>
                                     <th  data-field="id" data-sortable="true">ID</th>
+                                    <th  data-field="registration_no" data-sortable="true">Registration No</th>
                                     <th  data-field="year_semester" data-sortable="true">Year/Semester</th>
                                     <th  data-field="exam_month_year" data-sortable="true">Exam Month and Year</th>
                                     <th  data-field="total_marks" data-sortable="true">Total Marks</th>

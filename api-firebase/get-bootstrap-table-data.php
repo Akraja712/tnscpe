@@ -838,15 +838,23 @@ if (isset($_GET['table']) && $_GET['table'] == 'result') {
     if (isset($_GET['order'])){
         $order = $db->escapeString($_GET['order']);
     }
-    $sql = "SELECT COUNT(`id`) as total FROM `result` ";
-    $db->sql($sql);
-    $res = $db->getResult();
-    foreach ($res as $row)
-        $total = $row['total'];
-   
-    $sql = "SELECT * FROM result " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
-    $db->sql($sql);
-    $res = $db->getResult();
+    
+    $sql = "SELECT COUNT(r.id) as total FROM result r";
+$db->sql($sql);
+$res = $db->getResult();
+foreach ($res as $row) {
+    $total = $row['total'];
+}
+
+// Query to get the result details along with the registration number from the student table
+$sql = "SELECT r.*, s.registration_no 
+        FROM result r 
+        JOIN student s ON r.registration_no_id = s.id " . $where . " 
+        ORDER BY " . $sort . " " . $order . " 
+        LIMIT " . $offset . ", " . $limit;
+
+$db->sql($sql);
+$res = $db->getResult();
 
     $bulkData = array();
     $bulkData['total'] = $total;
@@ -860,6 +868,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'result') {
         $operate = ' <a href="edit-result.php?id=' . $row['id'] . '"><i class="fa fa-edit"></i>Edit</a>';
         $operate .= ' <a class="text text-danger" href="delete-result.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
         $tempRow['id'] = $row['id'];
+        $tempRow['registration_no'] = $row['registration_no'];
         $tempRow['year_semester'] = $row['year_semester'];
         $tempRow['exam_month_year'] = $row['exam_month_year'];
         $tempRow['total_marks'] = $row['total_marks'];
