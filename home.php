@@ -90,12 +90,29 @@ include "header.php";
                             $num = $db->numRows($res);
                             echo $num;
                              ?></h3>
-                            <p>Student Count</p>
+                            <p>Student's Count</p>
                         </div>
                         <div class="icon"><i class="fa fa-user"></i></div>
                         <a href="student.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
+                <div class="col-lg-4 col-xs-6">
+                    <div class="small-box bg-red">
+                        <div class="inner">
+                            <h3><?php
+                            $sql = "SELECT id FROM result";
+                            $db->sql($sql);
+                            $res = $db->getResult();
+                            $num = $db->numRows($res);
+                            echo $num;
+                             ?></h3>
+                            <p>Result's Count</p>
+                        </div>
+                        <div class="icon"><i class="fa fa-graduation-cap"></i></div>
+                        <a href="result.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+
             </div>
         </section>
     </div>

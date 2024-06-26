@@ -171,7 +171,7 @@ $fn = new custom_functions;
                     </a>
                 </li>
                 <li class="treeview">
-                    <a href="#">
+                    <a href="result.php">
                     <i class="fa fa-graduation-cap"></i>
                         <span>Results</span>
                     </a>
