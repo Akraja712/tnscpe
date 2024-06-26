@@ -823,7 +823,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'result') {
 
         if (isset($_GET['search']) && !empty($_GET['search'])) {
             $search = $db->escapeString($_GET['search']);
-            $where .= "WHERE id like '%" . $search . "%' OR name like '%" . $search . "%'";
+            $where .= "WHERE id like '%" . $search . "%' OR status like '%" . $search . "%'";
         }
     if (isset($_GET['sort'])){
         $sort = $db->escapeString($_GET['sort']);
