@@ -187,12 +187,12 @@ if (isset($_POST['btnAdd'])) {
                                        <select id='center_id' name="center_id" class='form-control' required>
                                              <option value="">--Select--</option>
                                              <?php
-                                              $sql = "SELECT id, name FROM `center`";
+                                              $sql = "SELECT id, center_name FROM `center`";
                                               $db->sql($sql);
                                                $result = $db->getResult();
                                               foreach ($result as $value) {
                                                   ?>
-                                             <option value='<?= $value['id'] ?>'><?= $value['name'] ?></option>
+                                             <option value='<?= $value['id'] ?>'><?= $value['center_name'] ?></option>
                                             <?php } ?>
                                        </select>
                                     </div>

@@ -177,12 +177,12 @@ if (!isset($res[0])) {
                                <select id='center_id' name="center_id" class='form-control' required>
                                      <option value="">--Select--</option>
                                      <?php
-                                      $sql = "SELECT id, name FROM `center`";
+                                      $sql = "SELECT id, center_name FROM `center`";
                                       $db->sql($sql);
                                        $result = $db->getResult();
                                       foreach ($result as $value) {
                                           ?>
-                                     <option value='<?php echo $value['id'] ?>' <?php echo ($res[0]['center_id'] == $value['id']) ? 'selected' : ''; ?>><?php echo $value['name'] ?></option>
+                                     <option value='<?php echo $value['id'] ?>' <?php echo ($res[0]['center_id'] == $value['id']) ? 'selected' : ''; ?>><?php echo $value['center_name'] ?></option>
                                     <?php } ?>
                                </select>
                             </div>
