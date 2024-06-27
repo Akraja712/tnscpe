@@ -885,8 +885,8 @@ $res = $db->getResult();
     print_r(json_encode($bulkData));
 }
 
-//explore
-if (isset($_GET['table']) && $_GET['table'] == 'explore') {
+//pdf
+if (isset($_GET['table']) && $_GET['table'] == 'pdf') {
 
     $offset = 0;
     $limit = 10;
@@ -912,13 +912,13 @@ if (isset($_GET['table']) && $_GET['table'] == 'explore') {
     if (isset($_GET['order'])){
         $order = $db->escapeString($_GET['order']);
     }
-    $sql = "SELECT COUNT(`id`) as total FROM `explore` ";
+    $sql = "SELECT COUNT(`id`) as total FROM `pdf` ";
     $db->sql($sql);
     $res = $db->getResult();
     foreach ($res as $row)
         $total = $row['total'];
    
-    $sql = "SELECT * FROM explore " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
+    $sql = "SELECT * FROM pdf " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
     $db->sql($sql);
     $res = $db->getResult();
 
@@ -931,10 +931,11 @@ if (isset($_GET['table']) && $_GET['table'] == 'explore') {
     foreach ($res as $row) {
 
         
-        $operate = ' <a href="edit-explore.php?id=' . $row['id'] . '"><i class="fa fa-edit"></i>Edit</a>';
-        $operate .= ' <a class="text text-danger" href="delete-explore.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
+        $operate = ' <a href="edit-pdf.php?id=' . $row['id'] . '"><i class="fa fa-edit"></i>Edit</a>';
+        $operate .= ' <a class="text text-danger" href="delete-pdf.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
         $tempRow['id'] = $row['id'];
-        $tempRow['main_content'] = $row['main_content'];
+        $tempRow['name'] = $row['name'];
+        $tempRow['pdf_file'] = $row['pdf_file'];
         $tempRow['operate'] = $operate;
         $rows[] = $tempRow;
     }

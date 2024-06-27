@@ -189,7 +189,7 @@ $fn = new custom_functions;
                     </a>
                 </li>
                 <li class="treeview">
-                    <a href="#">
+                    <a href="pdf.php">
                     <i class="fa fa-file-pdf-o"></i>
                         <span>Pdf</span>
                     </a>
