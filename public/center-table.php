@@ -22,7 +22,18 @@
                                 <tr>
                                 <th  data-field="operate" data-events="actionEvents">Action</th>
                                     <th  data-field="id" data-sortable="true">ID</th>
-                                    <th  data-field="name" data-sortable="true">Name</th>
+                                    <th data-field="image">Photo</th>
+                                    <th  data-field="center_name" data-sortable="true">Center Name</th>
+                                    <th  data-field="center_code" data-sortable="true">Center Code</th>
+                                    <th  data-field="director_name" data-sortable="true">Director Nmae</th>
+                                    <th  data-field="mobile_number" data-sortable="true">Mobile Number</th>
+                                    <th  data-field="whatsapp_number" data-sortable="true">Whatsapp Number</th>
+                                    <th  data-field="email_id" data-sortable="true">Email ID</th>
+                                    <th  data-field="password" data-sortable="true">Password</th>
+                                    <th  data-field="institute_address" data-sortable="true">Institute Address</th>
+                                    <th  data-field="city" data-sortable="true">City</th>
+                                    <th  data-field="state" data-sortable="true">State</th>
+                                    <th  data-field="country" data-sortable="true">Country</th>
                                 </tr>
                             </thead>
                         </table>

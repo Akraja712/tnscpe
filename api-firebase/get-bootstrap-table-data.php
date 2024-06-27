@@ -641,7 +641,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'admission') {
     foreach ($res as $row)
         $total = $row['total'];
    
-    $sql = "SELECT a.*, c.name as category_name, ce.name as center_name FROM admission a LEFT JOIN category c ON a.category_id = c.id LEFT JOIN center ce ON a.center_id = ce.id " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
+    $sql = "SELECT a.*, c.name as category_name, ce.center_name as center_name FROM admission a LEFT JOIN category c ON a.category_id = c.id LEFT JOIN center ce ON a.center_id = ce.id " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
     $db->sql($sql);
     $res = $db->getResult();
 
@@ -699,7 +699,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'center') {
 
         if (isset($_GET['search']) && !empty($_GET['search'])) {
             $search = $db->escapeString($_GET['search']);
-            $where .= "WHERE id like '%" . $search . "%' OR name like '%" . $search . "%'";
+            $where .= "WHERE id like '%" . $search . "%' OR center_name like '%" . $search . "%'";
         }
     if (isset($_GET['sort'])){
         $sort = $db->escapeString($_GET['sort']);
@@ -729,7 +729,22 @@ if (isset($_GET['table']) && $_GET['table'] == 'center') {
         $operate = ' <a href="edit-center.php?id=' . $row['id'] . '"><i class="fa fa-edit"></i>Edit</a>';
         $operate .= ' <a class="text text-danger" href="delete-center.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
         $tempRow['id'] = $row['id'];
-        $tempRow['name'] = $row['name'];
+        $tempRow['center_name'] = $row['center_name'];
+        $tempRow['center_code'] = $row['center_code'];
+        $tempRow['director_name'] = $row['director_name'];
+        $tempRow['mobile_number'] = $row['mobile_number'];
+        $tempRow['whatsapp_number'] = $row['whatsapp_number'];
+        $tempRow['email_id'] = $row['email_id'];
+        $tempRow['institute_address'] = $row['institute_address'];
+        $tempRow['city'] = $row['city'];
+        $tempRow['state'] = $row['state'];
+        $tempRow['country'] = $row['country'];
+        $tempRow['password'] = $row['password'];
+        if (!empty($row['image'])) {
+            $tempRow['image'] = "<a data-lightbox='category' href='" . $row['image'] . "' data-caption='" . $row['image'] . "'><img src='" . $row['image'] . "' title='" . $row['image'] . "' height='50' /></a>";
+        } else {
+            $tempRow['image'] = 'No Image';
+        }
         $tempRow['operate'] = $operate;
         $rows[] = $tempRow;
     }
